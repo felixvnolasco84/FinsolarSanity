@@ -2,7 +2,7 @@ import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const homePageType = defineType({
   name: 'home_page',
-  title: 'Compañía',
+  title: 'Home Page',
   type: 'document',
   fields: [
     defineField({
@@ -114,33 +114,30 @@ export const homePageType = defineType({
         }),
 
         defineField({
-          type: "array",
-          name: "solutions",
-          title : "Soluciones",
+          type: 'array',
+          name: 'solutions',
+          title: 'Soluciones',
           of: [
             defineArrayMember({
-              type: "object",
-              name: "soluciones",
-              title: "Soluciones",
+              type: 'object',
+              name: 'soluciones',
+              title: 'Soluciones',
               fields: [
                 {type: 'string', name: 'title', title: 'Título'},
                 {type: 'string', name: 'subtitle', title: 'Subtitulo'},
                 {type: 'string', name: 'description', title: 'Descripción'},
                 {type: 'string', name: 'button_text', title: 'Texto del botón'},
                 {type: 'string', name: 'button_link', title: 'Enlace del botón'},
-                {type: 'array', name: 'product', title: 'Productos', of: [
-                  defineArrayMember({
-                    type: 'reference',
-                    name: 'produc',
-                    to: {type: 'product'}
-                  })
-                ]}
+                {
+                  type: 'array',
+                  name: 'products_references',
+                  title: 'Productos',
+                  of: [{type: 'reference', name: 'product_ref', to: {type: 'product'}}],
+                },
               ],
             }),
           ],
-        })
-
-        
+        }),
       ],
     }),
     defineField({
@@ -315,9 +312,11 @@ export const homePageType = defineType({
             defineArrayMember({
               type: 'object',
               name: 'companyValue',
+              title: 'Alianza',
               fields: [
                 {type: 'string', name: 'title', title: 'Título'},
                 {type: 'image', name: 'image', title: 'Imagen'},
+                {type: 'url', name: 'externalLink', title: 'Enlace Externo'},
               ],
             }),
           ],

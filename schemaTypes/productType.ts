@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField,  defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const productType = defineType({
   name: 'product',
@@ -9,6 +9,17 @@ export const productType = defineType({
       name: 'title',
       title: 'Nombre de Producto',
       type: 'string',
+    }),
+    defineField({
+      name: 'category',
+      title: 'Categoría',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'INVERSIONES', value: 'INVERSIONES'},
+          {title: 'ENERGIA', value: 'ENERGIA'},
+        ],
+      },
     }),
     defineField({
       name: 'slug',
@@ -54,6 +65,7 @@ export const productType = defineType({
       ],
     }),
     defineField({
+      
       name: 'subHeroSection',
       type: 'object',
       title: 'Subhero Section',
@@ -195,7 +207,6 @@ export const productType = defineType({
         }),
       ],
     }),
-
     defineField({
       name: 'benefitsSection',
       title: 'Sección Beneficios',
@@ -274,19 +285,11 @@ export const productType = defineType({
           type: 'array',
           title: 'Industria',
           of: [
-            defineArrayMember({
-              type: 'object',
-              name: 'industryValue',
-              fields: [
-                {type: 'string', name: 'title', title: 'Título'},
-                {type: 'string', name: 'link', title: 'Enlace'},
-              ],
-            }),
+            {type: "reference", to: {type: "industry"}},
           ],
         }),
       ],
     }),
-
     defineField({
       name: 'faqs',
       type: 'array',
@@ -299,6 +302,38 @@ export const productType = defineType({
             {type: 'string', name: 'title', title: 'Pregunta'},
             {type: 'array', name: 'body', title: 'Respuesta', of: [{type: 'block'}]},
           ],
+        }),
+      ],
+    }),
+
+    defineField({
+      name: 'homeSection',
+      type: 'object',
+      title: 'Sección de Home',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Título',
+          type: 'string',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Descripción',
+          type: 'string',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'button_text',
+          title: 'Texto del botón',
+          type: 'string',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'button_link',
+          title: 'Enlace del botón',
+          type: 'string',
+          validation: (rule) => rule.required(),
         }),
       ],
     }),
