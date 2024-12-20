@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const homePageType = defineType({
   name: 'home_page',
@@ -35,6 +35,11 @@ export const homePageType = defineType({
           validation: (rule) => rule.required(),
         }),
         defineField({
+          name: 'video',
+          title: 'Video',
+          type: 'file',
+        }),
+        defineField({
           name: 'button_text',
           title: 'Texto del botón',
           type: 'string',
@@ -61,6 +66,11 @@ export const homePageType = defineType({
         defineField({
           name: 'image',
           type: 'image',
+        }),
+        defineField({
+          name: 'video',
+          title: 'Video',
+          type: 'file',
         }),
         defineField({
           name: 'button_text',
@@ -206,6 +216,12 @@ export const homePageType = defineType({
           type: 'file',
         }),
         defineField({
+          title: 'Poster',
+          name: 'poster',
+          type: 'image',
+        }),
+
+        defineField({
           name: 'button_text',
           title: 'Texto del botón',
           type: 'string',
@@ -316,6 +332,35 @@ export const homePageType = defineType({
               fields: [
                 {type: 'string', name: 'title', title: 'Título'},
                 {type: 'image', name: 'image', title: 'Imagen'},
+                {type: 'url', name: 'externalLink', title: 'Enlace Externo'},
+              ],
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'news',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          type: 'string',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'newsArray',
+          type: 'array',
+          title: 'Lista de Noticias',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'news',
+              fields: [
+                {type: 'string', name: 'title', title: 'Título'},
+                {type: 'string', name: 'description', title: 'Descripción'},
+                {type: 'image', name: 'image', title: 'Imagen'},
+                {type: 'string', name: 'backgroundColor', title: 'Color de fondo'},
                 {type: 'url', name: 'externalLink', title: 'Enlace Externo'},
               ],
             }),
